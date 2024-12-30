@@ -1,12 +1,126 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <!-- 添加移动端视口设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style>
-        body{margin:0;padding:0;overflow: hidden;} .city{width:100%;position:fixed;bottom:
-                0px;z-index: 100;} .city img{width: 100%;}
-        audio{
-            opacity: 0;
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-size: 16px;
+        }
+
+        /* 对话框部分 */
+        .page_one {
+            position: fixed;
+            z-index: 10;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .text_wrapper {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .text_wrapper img {
+            width: 60px;
+            height: auto;
+        }
+
+        .text {
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        /* 按钮组样式优化 */
+        .btn-groups {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            margin: 0 15px;
+        }
+
+        .btn span {
+            line-height: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* 背景城市图片 */
+        .city {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .city img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 画布适配 */
+        #cas {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* 文字形状容器 */
+        .shape {
+            font-size: 1rem;
+        }
+
+        /* 心形按钮动画优化 */
+        @keyframes breath {
+            0% {
+                transform: scale3d(1,1,1);
+            }
+            50% {
+                transform: scale3d(1.02,1.02,1.02);
+            }
+            100% {
+                transform: scale3d(1,1,1);
+            }
+        }
+
+        /* 媒体查询 */
+        @media screen and (max-width: 375px) {
+            .text {
+                font-size: 0.9rem;
+            }
+            .btn {
+                width: 45px;
+                height: 45px;
+            }
+            .btn span {
+                line-height: 45px;
+                font-size: 0.8rem;
+            }
         }
     </style>
     <title>
@@ -71,5 +185,4 @@
 <script src="fire.js"></script>
 <script src="talk.js"></script>
 </body>
-
 </html>
