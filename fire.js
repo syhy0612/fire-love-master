@@ -6,10 +6,6 @@ ocas.width = canvas.width = window.innerWidth;
 ocas.height = canvas.height = window.innerHeight;
 var bigbooms = [];
 
-// window.onload = function() {
-//     initAnimate();
-// };
-
 document.getElementById("iframMusic").onload = function(){
     var music = document.getElementById("music");
     music.src = 'music.mp3';
@@ -225,7 +221,8 @@ function putValue(canvas, context, ele, dr, callback) {
     } else {
         var text = ele.innerHTML;
         context.save();
-        var fontSize = 200;
+        // 修改字体大小，根据屏幕宽度自适应
+        var fontSize = Math.min(window.innerWidth * 0.15, 100); // 最大100px，最小是屏幕宽度的15%
         context.font = fontSize + "px 宋体 bold";
         context.textAlign = "center";
         context.textBaseline = "middle";
@@ -236,21 +233,16 @@ function putValue(canvas, context, ele, dr, callback) {
         callback(dots)
     }
 }
-function imgload(img, callback) {
-    if (img.complete) {
-        callback.call(img)
-    } else {
-        img.onload = function() {
-            callback.call(this)
-        }
-    }
-}
+
+// 调整采样点的间距，使文字更紧凑
 function getimgData(canvas, context, dr) {
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
     context.clearRect(0, 0, canvas.width, canvas.height);
     var dots = [];
-    for (var x = 0; x < imgData.width; x += dr) {
-        for (var y = 0; y < imgData.height; y += dr) {
+    // 减小dr值，使文字更清晰
+    var sampling = window.innerWidth < 768 ? 3 : 5; // 在移动端使用更小的采样间距
+    for (var x = 0; x < imgData.width; x += sampling) {
+        for (var y = 0; y < imgData.height; y += sampling) {
             var i = (y * imgData.width + x) * 4;
             if (imgData.data[i + 3] > 128) {
                 var dot = {
